@@ -1,0 +1,35 @@
+[
+  {
+    "model": "notices.user",
+    "fields": {
+      "password": "password",
+      "is_superuser": true,
+      "username": "SuperUser",
+      "first_name": "Super",
+      "last_name": "User",
+      "email": "superuser@testmail.com"
+    }
+  },
+  {
+    "model": "notices.user",
+    "fields": {
+      "password": "password",
+      "is_superuser": false,
+      "username": "UserOne",
+      "first_name": "User",
+      "last_name": "One",
+      "email": "userone@testmail.com"
+    }
+  },
+    {
+    "model": "notices.user",
+    "fields": {
+      "password": "password",
+      "is_superuser": false,
+      "username": "UserTwo",
+      "first_name": "User",
+      "last_name": "Two",
+      "email": "usertwo@testmail.com"
+    }
+  }
+]

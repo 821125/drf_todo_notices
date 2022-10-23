@@ -3,18 +3,22 @@ from notices.models import User
 
 
 # Create your models here.
-
-
 class Project(models.Model):
+    class Meta:
+        verbose_name = 'Project'
+
     name = models.CharField(unique=True, max_length=32)
     link = models.CharField(max_length=256)
     user = models.ManyToManyField(User)
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name
 
 
 class TODO(models.Model):
+    class Meta:
+        verbose_name = 'Note'
+
     project = models.OneToOneField(Project, on_delete=models.CASCADE)
     text = models.CharField(max_length=256)
     user = models.OneToOneField(User, on_delete=models.CASCADE)

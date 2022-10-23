@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 
 const Menu = () => {
@@ -13,7 +14,11 @@ const Menu = () => {
 
     return (
         <menu style={menuStyle}>
-            <p>MENU</p>
+            <ul>
+                <li><Link to="/">Users</Link></li>
+                <li><Link to="/project">Projects</Link></li>
+                <li><Link to="/todo">Tasks</Link></li>
+            </ul>
         </menu>
     );
 };

@@ -1,5 +1,20 @@
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 from .models import Project, TODO
+from notices.models import User
+
+
+class UsersListSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username',)
+
+
+class ProjectNameSerializer(ModelSerializer):
+    users_list = UsersListSerializer(many=True)
+
+    class Meta:
+        model = Project
+        fields = ('name',)
 
 
 class ProjectModelSerializer(ModelSerializer):
@@ -9,6 +24,8 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class TODOModelSerializer(HyperlinkedModelSerializer):
+    project = ProjectNameSerializer()
+
     class Meta:
         model = TODO
         fields = '__all__'

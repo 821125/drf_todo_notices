@@ -9,6 +9,10 @@ const ProjectItem = ({project}) => {
             <td>
                 {project.url}
             </td>
+            <td>
+                {project.users_list[0].username}
+                </td>
+
         </tr>
     )
 }
@@ -19,18 +23,22 @@ const ProjectList = ({projects}) => {
 
             <div className="inner">
                 <table className="Table">
-                    <th>
-                        project name
-                    </th>
-                    <th>
-                        URl
-                    </th>
-                    <th>
-                        Users List
-                    </th>
-
-                    {projects.map((project) => <ProjectItem project={project}/>)}
-
+                    <thead>
+                    <tr>
+                        <th>
+                            Project name
+                        </th>
+                        <th>
+                            URl
+                        </th>
+                        <th>
+                            Users List
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {projects.map((project, idx) => <ProjectItem project={project} key={project.id}/>)}
+                    </tbody>
                 </table>
             </div>
 

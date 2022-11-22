@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'notices',
+    'authors',
     'todo',
     'drf_yasg',
     'corsheaders',
+    'graphene_django'
 ]
 
 MIDDLEWARE = [
@@ -149,4 +151,9 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+}
+
+
+GRAPHENE = {
+    'SCHEMA': 'notice.schema.schema'
 }

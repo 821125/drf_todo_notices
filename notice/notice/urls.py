@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from graphene_django.views import GraphQLView
 from rest_framework.permissions import AllowAny
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
@@ -47,4 +48,5 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('qraphql/', GraphQLView.as_view(graphiql=True)),
 ]

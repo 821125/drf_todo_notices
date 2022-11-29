@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from django.conf.global_settings import AUTH_USER_MODEL
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+FRONTEND_DIR = BASE_DIR / 'notice/frontend'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -24,7 +28,7 @@ SECRET_KEY = 'django-insecure-kq*wg(ed$&_89u*9qot&pxh%b^h80b%cs*zfe)z9ziy=qu*6b6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
@@ -66,7 +70,7 @@ ROOT_URLCONF = 'notice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [FRONTEND_DIR / 'build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,6 +128,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATICFILES_DIRS = [FRONTEND_DIR / 'build' / 'static']
 
 STATIC_URL = '/static/'
 

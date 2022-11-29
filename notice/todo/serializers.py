@@ -6,7 +6,7 @@ from notices.models import User
 class UsersListSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username',)
+        fields = ('id', 'username', 'email', 'first_name', 'last_name')
 
 
 class ProjectNameSerializer(ModelSerializer):

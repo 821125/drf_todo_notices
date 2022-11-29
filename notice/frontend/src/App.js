@@ -2,10 +2,13 @@ import './App.css';
 import React from "react";
 import UserList from "./components/User";
 import Footer from "./components/Footer";
+import ProjectList from "./components/Project";
+import Header from "./components/Header";
+import TodoList from "./components/TODO";
+import LoginForm from "./components/Loginform";
 import axios from "axios";
-import {Route, Switch, BrowserRouter, Link} from 'react-router-dom'
-import Cookies from 'universal-cookie'
-import './App.css';
+import {Route, Routes, BrowserRouter, Link} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 
 const NotFound404 = ({location}) => {
@@ -96,6 +99,30 @@ class App extends React.Component {
         this.get_token_from_storage()
     }
 
+    deleteUser(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/users/${id}`, {headers})
+            .then(response => {
+
+                    this.load_data();
+                }
+            ).catch(error => console.log(error))
+
+        console.log('delete' + id)
+    }
+
+    deleteTodo(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/todo/${id}`, {headers})
+            .then(response => {
+
+                    this.load_data();
+                }
+            ).catch(error => console.log(error))
+
+        console.log('delete' + id)
+    }
+
     render() {
         return (
             <div className="container">
@@ -110,7 +137,7 @@ class App extends React.Component {
                                 <Link to='/project'>Projects</Link>
                             </li>
                             <li>
-                                <Link to='/todo'>TODO</Link>
+                                <Link to='/todo'>Todo</Link>
                             </li>
                             <li>
                                 {this.is_authenticated() ? <button onClick={() =>
@@ -118,21 +145,26 @@ class App extends React.Component {
                             </li>
                         </ul>
                     </nav>
-                    <Switch>
-                        <Route exact path='/' component={() => <UserList users={this.state.users}/>}/>
+                    <Routes>
+                        <Route exact path='/' component={() => <UserList
+                            users={this.state.users}
+                            deleteUser={(id) => this.deleteUser(id)}
+                        />}/>
                         <Route exact path='/project/'
                                component={() => <ProjectList projects={this.state.projects}/>}/>
-                        <Route exact path='/todo/' component={() => <TodoList todos={this.state.todos}/>}/>
+                        <Route exact path='/todo/' component={() => <TodoList
+                            todos={this.state.todos}
+                            deleteTodo={(id) => this.deleteTodo(id)}
+                        />}/>
                         <Route exact path='/login/' component={() => <LoginForm
                             get_token={(username, password) => this.get_token(username, password)}/>}/>
                         <Route component={NotFound404}/>
-                    </Switch>
+                    </Routes>
                 </BrowserRouter>
                 <Footer> </Footer>
             </div>
         )
     }
 }
-
 
 export default App;
